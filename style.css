@@ -21,7 +21,7 @@ body {
 	margin-left: auto;
 }
 
-#round{
+#roundwork{
 	margin-left: auto;
 	margin-right: auto;
 	width: 400px;
@@ -37,6 +37,24 @@ body {
     cursor: pointer;
     transition: 1s;
 }
+
+#roundbreak{
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+	height: 400px;
+    background-color: #ff4c4c;
+    border-radius: 50%;
+    border: 5px solid #ffd6d6;
+    line-height: 400px;
+    font-family: Mukta;
+    font-size: 4em;
+    color: #ffd6d6;
+    text-align: center;
+    cursor: pointer;
+    transition: 1s;
+}
+
 
 #settings{
 	margin-right: auto;

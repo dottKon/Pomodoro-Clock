@@ -1,5 +1,6 @@
 
 //values that can be changed with the settings
+var sec = 5;
 var minutes = 0;
 var seconds = 5;
 var bMinutes = 0;
@@ -11,10 +12,17 @@ var breakSeconds = bSeconds;
 var workMinutes = minutes;
 var workSeconds = seconds;
 
+
+
 //click detector
-var clicker = document.getElementById('round');
-if(clicker){
-	clicker.addEventListener("click", workTimer);
+var worker = document.getElementById('roundwork');
+if(worker){
+	worker.addEventListener("click", workTimer);
+};
+
+var breaker = document.getElementById('roundbreak');
+if(breaker){
+	breaker.addEventListener("click", breakTimer);
 };
 
 //executed detects which phase the timer is in
@@ -25,17 +33,12 @@ var breakExecuted = false;
 var intervalWork;
 var intervalBreak;
 
-var d = new Date();
 
 function workTimer(){
+
 	if(!executed){
-		var time = d.getTime() / 1000;
-		console.log(time);
-		var time2;
-		document.getElementById('round').style.backgroundColor = '#c41b01';
+		console.log(executed);
 		executed = true;
-		workSeconds = seconds;
-		workMinutes = minutes;
 
 		intervalWork = setInterval(function(){
 			
@@ -56,18 +59,18 @@ function workTimer(){
 				document.getElementById('timer').innerHTML = '0' +workMinutes + ':' + '0' + workSeconds;
 			}
 			if(workMinutes == 0 && workSeconds == 0){
-				breakTimer();
-				clearWork();
+				
 				breakExecuted = false;
+				breakTimer();
+				stopWork();
+				document.getElementById("roundwork").setAttribute("id", "roundbreak");
+				console.log(executed);
 			}
 
 		}, 1000);
 
-	} else if(!breakExecuted){
+	} else {
 		clearWork();
-		time2 = d.getTime() / 1000;
-		console.log(time-time2);
-
 	}
 
 }
@@ -76,10 +79,9 @@ function workTimer(){
 function breakTimer(){
 	if(!breakExecuted){
 		breakExecuted = true;
-		executed = false;
 		breakMinutes = bMinutes;
 		breakSeconds = bSeconds;
-		document.getElementById('round').style.backgroundColor = '#c5db00';
+
 
 
 		intervalBreak = setInterval(function(){
@@ -100,13 +102,14 @@ function breakTimer(){
 				document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + '0' + breakSeconds;
 			}
 			if(breakMinutes == 0 && breakSeconds == 0){
-				workTimer();
-				clearBreak();
 				executed = false;
+				workTimer();
+				stopBreak();
+				document.getElementById("roundbreak").setAttribute("id", "roundwork");
 			}
 
 		}, 1000); 
-	} else {
+	} else if(!executed){
 		clearBreak();
 	}
 }
@@ -116,19 +119,27 @@ function breakTimer(){
 //work pausing function
 function clearWork(){
 	clearInterval(intervalWork);
-	executed = false;
+	seconds = workSeconds;
+	executed= false;
 }
 
 function clearBreak(){
 	clearInterval(intervalBreak);
 	breakExecuted = false;
-	executed = true; 
+	workSeconds = sec;
 }
 
 
 
+function stopWork(){
+	clearInterval(intervalWork);
+	seconds = workSeconds;
+}
 
-
+function stopBreak(){
+	clearInterval(intervalBreak);
+	workSeconds = sec;
+}
 
 
 //starter timer on windows load
