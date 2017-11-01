@@ -24,18 +24,18 @@ body {
 #roundwork{
 	margin-left: auto;
 	margin-right: auto;
-	width: 400px;
-	height: 400px;
+	width: 350px;
+	height: 350px;
     background-color: #c41b01;
     border-radius: 50%;
-    border: 5px solid #ffd6d6;
-    line-height: 400px;
-    font-family: Mukta;
+    border: 10px solid #ffd6d6;
+    line-height: 350px;
+    font-family: Anton;
     font-size: 4em;
     color: #ffd6d6;
     text-align: center;
     cursor: pointer;
-    transition: 1s;
+    transition: 2s;
 }
 
 #roundbreak{
@@ -43,21 +43,51 @@ body {
 	margin-right: auto;
 	width: 400px;
 	height: 400px;
-    background-color: #ff4c4c;
+    background-color: #333;
     border-radius: 50%;
-    border: 5px solid #ffd6d6;
+    border: 10px solid #ffd6d6;
     line-height: 400px;
-    font-family: Mukta;
+    font-family: Anton;
     font-size: 4em;
     color: #ffd6d6;
     text-align: center;
     cursor: pointer;
-    transition: 1s;
+    transition: 2s;
 }
 
-
-#settings{
+#break{
 	margin-right: auto;
 	margin-left: auto;
-	width: 400px;
+	width: 70px;
+	height: 20px;
+	background-color: #fff;
+	margin-bottom: 10px;
+	overflow: hidden;
+	text-align: center;
+	background-color: #333;
+	border: 2px solid white;
+	color: #ffd6d6;
+	font-family: Anton;
+	line-height: 20px;
+    font-size: 1.2em;
+
+    border-radius: 5px;
+}
+#work{
+	margin-right: auto;
+	margin-left: auto;
+	width: 70px;
+	height: 20px;
+	background-color: #fff;
+	margin-bottom: 10px;
+	overflow: hidden;
+	text-align: center;
+	background-color: #c41b01;
+    border: 2px solid #ffd6d6;
+    color: #ffd6d6;
+    font-family: Anton;
+    line-height: 20px;
+    font-size: 1.2em;
+	border-radius: 5px;
+
 }
