@@ -3,17 +3,17 @@
 
 
 setWorkSec = 0;
-setWorkMin = 25;
-setBreakSec = 4;
-setBreakMin = 0;
+setWorkMin = 1;
+setBreakSec = 0;
+setBreakMin = 1;
 
 
 //values used in functions
 
-var minutes = 0;
-var seconds = 5;
-var bMinutes = 0;
-var bSeconds = 4;
+var minutes = 1;
+var seconds = 0;
+var bMinutes = 1;
+var bSeconds = 0;
 
 //values for the timer use only
 var breakMinutes = bMinutes;
@@ -30,11 +30,32 @@ var downWork = document.getElementById('downWork');
 if(downWork){
 	downWork.addEventListener("click", workDown);
 }
+
+
+var upWork = document.getElementById('upWork');
+if(upWork){
+	upWork.addEventListener("click", workUp);
+}
+
+var downBreak = document.getElementById('downBreak');
+if(downBreak){
+	downBreak.addEventListener("click", downBreak);
+}
+
+var upBreak = document.getElementById('upBreak');
+if(upBreak){
+	upBreak.addEventListener("click", upBreak);
+}
+
+
+
+
 function workDown(){
-	if(setWorkMin > 0 || executed){
+	if(setWorkMin > 0 && !executed){
 		setWorkMin--;
-		minutes = setWorkMin;
-		seconds = setWorkSec;
+		workMinutes = setWorkMin;
+		workSeconds = setWorkSec;
+		setTime();
 		document.getElementById('timer').innerHTML = minutes + ':' + seconds;
 		if(seconds < 10){
 			document.getElementById('timer').innerHTML = minutes + ':' + '0' + seconds;
@@ -46,26 +67,50 @@ function workDown(){
 		if(seconds < 10 && minutes < 10){
 			document.getElementById('timer').innerHTML = '0' +minutes + ':' + '0' + seconds;
 		}
-		document.getElementById('displayWork').innerHTML = setWorkMin + ':00';
+		document.getElementById('displayWork').innerHTML = setWorkMin;
 	}
 }
 
-var upWork = document.getElementById('upWork');
-if(upWork){
-	upWork.addEventListener("click", workUp);
-}
+
 function workUp(){
-	if(setWorkMin >= 0){
+	if(setWorkMin >= 0 && !executed){
 		setWorkMin++;
+		workMinutes = setWorkMin;
+		workSeconds = setWorkSec;
 		console.log(setWorkMin);
 		setTime();
-		document.getElementById('displayWork').innerHTML = setWorkMin + ':00';
+		document.getElementById('timer').innerHTML = minutes + ':' + seconds;
+		if(seconds < 10){
+			document.getElementById('timer').innerHTML = minutes + ':' + '0' + seconds;
+		}
+		if(minutes < 10){
+			document.getElementById('timer').innerHTML = '0' +minutes + ':' + seconds;
+		}
+
+		if(seconds < 10 && minutes < 10){
+			document.getElementById('timer').innerHTML = '0' +minutes + ':' + '0' + seconds;
+		}
+		document.getElementById('displayWork').innerHTML = setWorkMin;
 	}
 }
 
 
+function downBreak(){
+	if(setBreakMin > 0 && breakExecuted){
+		setBreakMin--;
+		breakMinutes = setBreakMin;
+		document.getElementById('displayWork').innerHTML = setWorkMin + ':00';
+	}
+}
 
-
+function upBreak(){
+	if(setBreakMin >= 0 && !breakExecuted){
+		setBreakMin++;
+		console.log('!');
+		breakMinutes = setBreakMin;
+		document.getElementById('displayWork').innerHTML = setWorkMin + ':00';
+	}
+}
 
 
 
@@ -142,7 +187,7 @@ function workTimer(){
 				
 			}
 
-		}, 1000);
+		}, 100);
 
 	} else {
 		clearWork();
@@ -186,7 +231,7 @@ function breakTimer(){
 				document.getElementById("roundbreak").setAttribute("id", "roundwork");
 			}
 
-		}, 1000); 
+		}, 100); 
 	} else if(breakExecuted){
 		clearBreak();
 	}

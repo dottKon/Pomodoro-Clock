@@ -25,12 +25,12 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	width: 350px;
-	height: 350px;
+	height: 100px;
     background-color: #c41b01;
-    border-radius: 50%;
-    border: 10px solid #ffd6d6;
-    line-height: 350px;
-    font-family: Anton;
+    border-radius: 5%;
+    border: 5px solid #ffd6d6;
+    line-height: 100px;
+    font-family: 'Nova Mono', monospace;
     font-size: 4em;
     color: #ffd6d6;
     text-align: center;
@@ -41,13 +41,12 @@ body {
 #roundbreak{
 	margin-left: auto;
 	margin-right: auto;
-	width: 400px;
-	height: 400px;
+	width: 350px;
+	height: 100px;
     background-color: #333;
-    border-radius: 50%;
-    border: 10px solid #ffd6d6;
-    line-height: 400px;
-    font-family: Anton;
+    border: 5px solid #ffd6d6;
+    line-height: 100px;
+    font-family: 'Nova Mono', monospace;
     font-size: 4em;
     color: #ffd6d6;
     text-align: center;
@@ -58,7 +57,7 @@ body {
 #break{
 	margin-right: auto;
 	margin-left: auto;
-	width: 70px;
+	width: 120px;
 	height: 20px;
 	background-color: #fff;
 	margin-bottom: 10px;
@@ -67,7 +66,7 @@ body {
 	background-color: #333;
 	border: 2px solid white;
 	color: #ffd6d6;
-	font-family: Anton;
+	font-family: 'Nova Mono', monospace;
 	line-height: 20px;
     font-size: 1.2em;
 
@@ -76,7 +75,7 @@ body {
 #work{
 	margin-right: auto;
 	margin-left: auto;
-	width: 70px;
+	width: 120px;
 	height: 20px;
 	background-color: #fff;
 	margin-bottom: 10px;
@@ -85,7 +84,7 @@ body {
 	background-color: #c41b01;
     border: 2px solid #ffd6d6;
     color: #ffd6d6;
-    font-family: Anton;
+    font-family: 'Nova Mono', monospace;
     line-height: 20px;
     font-size: 1.2em;
 	border-radius: 5px;
