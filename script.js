@@ -26,6 +26,12 @@ var workSeconds = seconds;
 
 //settings
 //click detectors
+
+var restart = document.getElementById('restart');
+if(restart){
+	restart.addEventListener("click", reset);
+}
+
 var downWork = document.getElementById('downWork');
 if(downWork){
 	downWork.addEventListener("click", workDown);
@@ -39,19 +45,17 @@ if(upWork){
 
 var downBreak = document.getElementById('downBreak');
 if(downBreak){
-	downBreak.addEventListener("click", downBreak);
+	downBreak.addEventListener("click", breakDown);
 }
 
 var upBreak = document.getElementById('upBreak');
 if(upBreak){
-	upBreak.addEventListener("click", upBreak);
+	upBreak.addEventListener("click", breakUp);
 }
 
 
-
-
 function workDown(){
-	if(setWorkMin > 0 && !executed){
+	if(setWorkMin > 1 && !executed){
 		setWorkMin--;
 		workMinutes = setWorkMin;
 		workSeconds = setWorkSec;
@@ -73,11 +77,10 @@ function workDown(){
 
 
 function workUp(){
-	if(setWorkMin >= 0 && !executed){
+	if(setWorkMin >= 1 && !executed){
 		setWorkMin++;
 		workMinutes = setWorkMin;
 		workSeconds = setWorkSec;
-		console.log(setWorkMin);
 		setTime();
 		document.getElementById('timer').innerHTML = minutes + ':' + seconds;
 		if(seconds < 10){
@@ -95,23 +98,55 @@ function workUp(){
 }
 
 
-function downBreak(){
-	if(setBreakMin > 0 && breakExecuted){
+function breakDown(){
+	if(setBreakMin > 1 && !breakExecuted){
 		setBreakMin--;
 		breakMinutes = setBreakMin;
-		document.getElementById('displayWork').innerHTML = setWorkMin + ':00';
-	}
-}
+		breakSeconds = setBreakSec;
 
-function upBreak(){
-	if(setBreakMin >= 0 && !breakExecuted){
-		setBreakMin++;
-		console.log('!');
+		document.getElementById('displayBreak').innerHTML = setBreakMin;
+		document.getElementById('timer').innerHTML = breakMinutes + ':' + breakSeconds;
+		if(breakSeconds < 10){
+			document.getElementById('timer').innerHTML = breakMinutes + ':' + '0' + breakSeconds;
+		}
+		if(breakMinutes < 10){
+			document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + breakSeconds;
+		}
+
+		if(breakSeconds < 10 && breakMinutes < 10){
+			document.getElementById('timer').innerHTML = '0' + breakMinutes + ':' + '0' + breakSeconds;
+		}
+		
+	
+		}
+	}
+
+
+function breakUp(){
+	if(setBreakMin >= 1 && !breakExecuted){
+		setBreakMin++;	
 		breakMinutes = setBreakMin;
-		document.getElementById('displayWork').innerHTML = setWorkMin + ':00';
+		breakSeconds = setBreakSec;
+
+		console.log(breakSeconds);
+		document.getElementById('displayBreak').innerHTML = setBreakMin;
+		document.getElementById('timer').innerHTML = breakMinutes + ':' + breakSeconds;
+		if(breakSeconds < 10){
+			document.getElementById('timer').innerHTML = breakMinutes + ':' + '0' + breakSeconds;
+		}
+		if(breakMinutes < 10){
+			document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + breakSeconds;
+		}
+
+		if(breakSeconds < 10 && breakMinutes < 10){
+			document.getElementById('timer').innerHTML = '0' + breakMinutes + ':' + '0' + breakSeconds;
+		}
 	}
 }
 
+function reset(){
+	window.location.reload();
+}
 
 
 
@@ -153,6 +188,7 @@ function workTimer(){
 
 	if(!executed){
 		executed = true;
+
 		document.getElementById('timer').innerHTML = 'WORK';
 
 
@@ -282,8 +318,8 @@ function stopBreak(){
 //starter timer on windows load
 function setTime(){
 	minutes = setWorkMin;
-	seconds = setWorkSec
-;	document.getElementById('timer').innerHTML = minutes + ':' + seconds;
+	seconds = setWorkSec;
+	document.getElementById('timer').innerHTML = minutes + ':' + seconds;
 	if(seconds < 10){
 		document.getElementById('timer').innerHTML = minutes + ':' + '0' + seconds;
 	}
@@ -293,6 +329,25 @@ function setTime(){
 
 	if(seconds < 10 && minutes < 10){
 		document.getElementById('timer').innerHTML = '0' +minutes + ':' + '0' + seconds;
+	}
+}
+
+
+function setBTime(){
+	if(intervalBreak){
+		bMinutes = setBreakMin;
+		bSeconds = setBreakSec;	
+		document.getElementById('timer').innerHTML = bMinutes + ':' + bSeconds;
+		if(bSeconds < 10){
+			document.getElementById('timer').innerHTML = bMinutes + ':' + '0' + bSeconds;
+		}
+		if(minutes < 10){
+			document.getElementById('timer').innerHTML = '0' +bMinutes + ':' + bSeconds;
+		}
+
+		if(bSeconds < 10 && bMinutes < 10){
+			document.getElementById('timer').innerHTML = '0' + bMinutes + ':' + '0' + bSeconds;
+		}
 	}
 }
 
