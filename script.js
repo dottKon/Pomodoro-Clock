@@ -3,16 +3,16 @@
 
 
 setWorkSec = 0;
-setWorkMin = 1;
+setWorkMin = 25;
 setBreakSec = 0;
-setBreakMin = 1;
+setBreakMin = 5;
 
 
 //values used in functions
 
-var minutes = 1;
+var minutes = 25;
 var seconds = 0;
-var bMinutes = 1;
+var bMinutes = 5;
 var bSeconds = 0;
 
 //values for the timer use only
@@ -26,6 +26,12 @@ var workSeconds = seconds;
 
 //settings
 //click detectors
+
+var worker = document.getElementById('roundwork');
+
+var breaker = document.getElementById('roundbreak');
+
+
 
 var restart = document.getElementById('restart');
 if(restart){
@@ -53,47 +59,56 @@ if(upBreak){
 	upBreak.addEventListener("click", breakUp);
 }
 
+var settable = true;
+var paused = true;
+
 
 function workDown(){
-	if(setWorkMin > 1 && !executed){
+	if(setWorkMin > 1 && settable){
 		setWorkMin--;
 		workMinutes = setWorkMin;
 		workSeconds = setWorkSec;
-		setTime();
-		document.getElementById('timer').innerHTML = minutes + ':' + seconds;
-		if(seconds < 10){
-			document.getElementById('timer').innerHTML = minutes + ':' + '0' + seconds;
-		}
-		if(minutes < 10){
-			document.getElementById('timer').innerHTML = '0' +minutes + ':' + seconds;
-		}
-
-		if(seconds < 10 && minutes < 10){
-			document.getElementById('timer').innerHTML = '0' +minutes + ':' + '0' + seconds;
-		}
 		document.getElementById('displayWork').innerHTML = setWorkMin;
+			if(paused){
+				document.getElementById('timer').innerHTML = workMinutes + ':' + workSeconds;
+				if(workSeconds < 10){
+					document.getElementById('timer').innerHTML = workMinutes + ':' + '0' + workSeconds;
+				}
+				if(workMinutes < 10){
+					document.getElementById('timer').innerHTML = '0' +workMinutes + ':' + workSeconds;
+				}
+
+				if(workSeconds < 10 && workMinutes < 10){
+					document.getElementById('timer').innerHTML = '0' +workMinutes + ':' + '0' + workSeconds;
+				}
+		}
+			
 	}
 }
 
 
 function workUp(){
-	if(setWorkMin >= 1 && !executed){
+	if(setWorkMin >= 1 && settable){
 		setWorkMin++;
 		workMinutes = setWorkMin;
 		workSeconds = setWorkSec;
-		setTime();
-		document.getElementById('timer').innerHTML = minutes + ':' + seconds;
-		if(seconds < 10){
-			document.getElementById('timer').innerHTML = minutes + ':' + '0' + seconds;
-		}
-		if(minutes < 10){
-			document.getElementById('timer').innerHTML = '0' +minutes + ':' + seconds;
-		}
-
-		if(seconds < 10 && minutes < 10){
-			document.getElementById('timer').innerHTML = '0' +minutes + ':' + '0' + seconds;
-		}
 		document.getElementById('displayWork').innerHTML = setWorkMin;
+		if(paused){
+			document.getElementById('timer').innerHTML = workMinutes + ':' + workSeconds;
+			if(workSeconds < 10){
+				document.getElementById('timer').innerHTML = workMinutes + ':' + '0' + workSeconds;
+			}
+			if(workMinutes < 10){
+				document.getElementById('timer').innerHTML = '0' +workMinutes + ':' + workSeconds;
+			}
+
+			if(workSeconds < 10 && workMinutes < 10){
+				document.getElementById('timer').innerHTML = '0' +workMinutes + ':' + '0' + workSeconds;
+			}
+		}
+		
+	} else{
+		console.log('err');
 	}
 }
 
@@ -105,16 +120,19 @@ function breakDown(){
 		breakSeconds = setBreakSec;
 
 		document.getElementById('displayBreak').innerHTML = setBreakMin;
-		document.getElementById('timer').innerHTML = breakMinutes + ':' + breakSeconds;
-		if(breakSeconds < 10){
-			document.getElementById('timer').innerHTML = breakMinutes + ':' + '0' + breakSeconds;
-		}
-		if(breakMinutes < 10){
-			document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + breakSeconds;
-		}
+		if(paused){
+			
+			document.getElementById('timer').innerHTML = breakMinutes + ':' + breakSeconds;
+			if(breakSeconds < 10){
+				document.getElementById('timer').innerHTML = breakMinutes + ':' + '0' + breakSeconds;
+			}
+			if(breakMinutes < 10){
+				document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + breakSeconds;
+			}
 
-		if(breakSeconds < 10 && breakMinutes < 10){
-			document.getElementById('timer').innerHTML = '0' + breakMinutes + ':' + '0' + breakSeconds;
+			if(breakSeconds < 10 && breakMinutes < 10){
+				document.getElementById('timer').innerHTML = '0' + breakMinutes + ':' + '0' + breakSeconds;
+			}
 		}
 		
 	
@@ -127,19 +145,20 @@ function breakUp(){
 		setBreakMin++;	
 		breakMinutes = setBreakMin;
 		breakSeconds = setBreakSec;
-
-		console.log(breakSeconds);
 		document.getElementById('displayBreak').innerHTML = setBreakMin;
-		document.getElementById('timer').innerHTML = breakMinutes + ':' + breakSeconds;
-		if(breakSeconds < 10){
-			document.getElementById('timer').innerHTML = breakMinutes + ':' + '0' + breakSeconds;
-		}
-		if(breakMinutes < 10){
-			document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + breakSeconds;
-		}
+		if(paused){
+			
+			document.getElementById('timer').innerHTML = breakMinutes + ':' + breakSeconds;
+			if(breakSeconds < 10){
+				document.getElementById('timer').innerHTML = breakMinutes + ':' + '0' + breakSeconds;
+			}
+			if(breakMinutes < 10){
+				document.getElementById('timer').innerHTML = '0' +breakMinutes + ':' + breakSeconds;
+			}
 
-		if(breakSeconds < 10 && breakMinutes < 10){
-			document.getElementById('timer').innerHTML = '0' + breakMinutes + ':' + '0' + breakSeconds;
+			if(breakSeconds < 10 && breakMinutes < 10){
+				document.getElementById('timer').innerHTML = '0' + breakMinutes + ':' + '0' + breakSeconds;
+			}
 		}
 	}
 }
@@ -152,9 +171,6 @@ function reset(){
 
 
 //click detector
-var worker = document.getElementById('roundwork');
-
-var breaker = document.getElementById('roundbreak');
 
  
 if(worker){
@@ -188,6 +204,8 @@ function workTimer(){
 
 	if(!executed){
 		executed = true;
+		settable = false;
+		paused = false;
 
 		document.getElementById('timer').innerHTML = 'WORK';
 
@@ -223,7 +241,7 @@ function workTimer(){
 				
 			}
 
-		}, 100);
+		}, 1000);
 
 	} else {
 		clearWork();
@@ -235,7 +253,8 @@ function workTimer(){
 function breakTimer(){
 	if(!breakExecuted){
 		breakExecuted = true;
-
+		settable = true;
+		paused = false;
 		//making sure we start from the 'settings' time
 
 		document.getElementById('timer').innerHTML = 'BREAK';
@@ -267,7 +286,7 @@ function breakTimer(){
 				document.getElementById("roundbreak").setAttribute("id", "roundwork");
 			}
 
-		}, 100); 
+		}, 1000); 
 	} else if(breakExecuted){
 		clearBreak();
 	}
@@ -280,6 +299,8 @@ function clearWork(){
 	clearInterval(intervalWork);
 	seconds = workSeconds;
 	executed= false;
+	settable = true;
+	paused = true;
 	document.getElementById('timer').innerHTML = 'PAUSED';
 }
 
@@ -287,6 +308,7 @@ function clearBreak(){
 	clearInterval(intervalBreak);
 	bSeconds = breakSeconds;
 	breakExecuted = false;
+	paused = true;
 	document.getElementById('timer').innerHTML = 'PAUSED';
 	
 }
@@ -300,6 +322,7 @@ function stopWork(){
 	workSeconds = seconds;
 	workMinutes = minutes;
 	executed = true;
+	settable = true;
 	worker.removeEventListener('click', workTimer);
 	worker.addEventListener('click', breakTimer);
 }
